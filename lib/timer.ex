@@ -107,15 +107,15 @@ defmodule Timer do
 
   ## Examples
 
-      iex> Timer.seconds 5
-      5000
+      iex> Timer.seconds 1.5
+      1500
 
       iex> Timer.seconds 25
       25000
 
   """
   def seconds(seconds) do
-    :timer.seconds(seconds)
+    :timer.seconds(seconds) |> trunc
   end
 
   @doc """
@@ -123,15 +123,15 @@ defmodule Timer do
 
   ## Examples
 
-      iex> Timer.minutes 5
-      300000
+      iex> Timer.minutes 1.5
+      90000
 
       iex> Timer.minutes 25
       1500000
 
   """
   def minutes(minutes) do
-    :timer.minutes(minutes)
+    :timer.minutes(minutes) |> trunc
   end
 
   @doc """
@@ -139,15 +139,15 @@ defmodule Timer do
 
   ## Examples
 
-      iex> Timer.hours 5
-      18000000
+      iex> Timer.hours 1.5
+      5400000
 
       iex> Timer.hours 25
       90000000
 
   """
   def hours(hours) do
-    :timer.hours(hours)
+    :timer.hours(hours) |> trunc
   end
 
   @doc """
@@ -155,15 +155,15 @@ defmodule Timer do
 
   ## Examples
 
-      iex> Timer.hms 1, 30, 0
-      5400000
+      iex> Timer.hms 1.5, 30.0, 0.5
+      7200500
 
       iex> Timer.hms 2, 45, 30
       9930000
 
   """
   def hms(hours, minutes, seconds) do
-    :timer.hms(hours, minutes, seconds)
+    :timer.hms(hours, minutes, seconds) |> trunc
   end
 
   def _timer_apply(function) do
