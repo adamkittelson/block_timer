@@ -1,5 +1,12 @@
 defmodule Timer do
 
+  @doc """
+  Starts the timer server. Normally, the server does not need
+  to be started explicitly. It is started dynamically if it is
+  needed. This is useful during development, but in a target
+  system the server should be started explicitly. Use configuration
+  parameters for kernel for this.
+  """
   def start do
     :timer.start
   end
@@ -63,39 +70,98 @@ defmodule Timer do
   def cancel(timer_reference) do
     :timer.cancel(timer_reference)
   end
-  
+
   def sleep(time_in_ms) do
     :timer.sleep time_in_ms
   end
-  
+
   def tc(function) do
     :timer.tc(function)
   end
-  
+
   def tc(function, arguments) do
     :timer.tc(function, arguments)
   end
-  
+
   def tc(module, function, arguments) do
     :timer.tc(module, function, arguments)
   end
 
+  @doc """
+  Calculates the time difference of timestamp2 - timestamp1 in microseconds,
+  where timestamp1 and timestamp2 are timestamp tuples returned from functions
+  such as erlang:now/0 or :os.timestamp/0.
+
+  ## Examples
+
+      iex> Timer.now_diff {1406, 488012, 327848}, {1406, 488009, 723552}
+      2604296
+
+  """
   def now_diff(timestamp2, timestamp1) do
     :timer.now_diff(timestamp2, timestamp1)
   end
 
+  @doc """
+  Returns the number of milliseconds in seconds
+
+  ## Examples
+
+      iex> Timer.seconds 5
+      5000
+
+      iex> Timer.seconds 25
+      25000
+
+  """
   def seconds(seconds) do
     :timer.seconds(seconds)
   end
 
+  @doc """
+  Returns the number of milliseconds in minutes
+
+  ## Examples
+
+      iex> Timer.minutes 5
+      300000
+
+      iex> Timer.minutes 25
+      1500000
+
+  """
   def minutes(minutes) do
     :timer.minutes(minutes)
   end
 
+  @doc """
+  Returns the number of milliseconds in hours
+
+  ## Examples
+
+      iex> Timer.hours 5
+      18000000
+
+      iex> Timer.hours 25
+      90000000
+
+  """
   def hours(hours) do
     :timer.hours(hours)
   end
 
+  @doc """
+  Returns the total number of milliseconds in hours + seconds + minutes
+
+  ## Examples
+
+      iex> Timer.hms 1, 30, 0
+      5400000
+
+      iex> Timer.hms 2, 45, 30
+      9930000
+
+  """
   def hms(hours, minutes, seconds) do
     :timer.hms(hours, minutes, seconds)
   end
