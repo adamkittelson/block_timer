@@ -19,11 +19,11 @@ defmodule Timer do
     :timer.apply_after(time_in_ms, module, function, arguments)
   end
 
-  defmacro apply_after(time_in_ms, body) do
+  defmacro apply_after(time_in_ms, env \\ nil, body) do
     quote do
       function = fn -> unquote body[:do] end
 
-      Timer.apply_after(unquote(time_in_ms), Timer, :_timer_apply, [function])
+      Timer.apply_after(unquote(time_in_ms), Timer, :_timer_apply, [function, unquote(env) || __ENV__])
     end
   end
 
@@ -83,11 +83,11 @@ defmodule Timer do
     :timer.apply_interval(time_in_ms, module, function, arguments)
   end
 
-  defmacro apply_interval(time_in_ms, body) do
+  defmacro apply_interval(time_in_ms, env \\ nil, body) do
     quote do
       function = fn -> unquote body[:do] end
 
-      Timer.apply_interval(unquote(time_in_ms), Timer, :_timer_apply, [function])
+      Timer.apply_interval(unquote(time_in_ms), Timer, :_timer_apply, [function, unquote(env) || __ENV__])
     end
   end
 
@@ -210,7 +210,19 @@ defmodule Timer do
     :timer.hms(hours, minutes, seconds)
   end
 
-  def _timer_apply(function) do
-    function.()
+  def _timer_apply(function, env) do
+    try do
+      function.()
+    catch
+      kind, error ->
+        {fun, arity} = env.function
+        IO.puts """
+        ** Timer apply error, originating from:
+             #{env.file}:#{env.line} in #{fun}/#{arity}
+           error:
+             #{Exception.format(kind, error)}
+        """
+    end
   end
+
 end
