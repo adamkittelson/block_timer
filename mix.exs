@@ -1,4 +1,4 @@
-defmodule Timer.Mixfile do
+defmodule BlockTimer.Mixfile do
   use Mix.Project
 
   def project do
