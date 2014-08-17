@@ -2,7 +2,7 @@ defmodule BlockTimer.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :timer,
+    [app: :block_timer,
      version: "0.0.1",
      elixir: "~> 0.15.0",
      deps: deps]
