@@ -11,7 +11,8 @@ defmodule BlockTimer.Mixfile do
         contributors: ["Adam Kittelson"],
         licenses: ["MIT"],
         links: %{ github: "https://github.com/adamkittelson/block_timer" }
-      ]
+      ],
+      description: "Macros to use :timer.apply_after and :timer.apply_interval with a block"
     ]
   end
 
