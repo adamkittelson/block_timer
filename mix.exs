@@ -4,7 +4,7 @@ defmodule BlockTimer.Mixfile do
   def project do
     [app: :block_timer,
      version: "0.0.1",
-     elixir: "~> 0.15.0",
+     elixir: "~> 1.0.0",
      deps: deps]
   end
 
