@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/adamkittelson/block_timer.svg?branch=master)](https://travis-ci.org/adamkittelson/block_timer)
+
 BlockTimer
 =====
 
