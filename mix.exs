@@ -2,10 +2,17 @@ defmodule BlockTimer.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :block_timer,
-     version: "0.0.1",
-     elixir: "~> 1.0.0",
-     deps: deps]
+    [
+      app: :block_timer,
+      version: "0.0.1",
+      elixir: "~> 1.0.0",
+      deps: deps,
+      package: [
+        contributors: ["Adam Kittelson"],
+        licenses: ["MIT"],
+        links: %{ github: "https://github.com/adamkittelson/block_timer" }
+      ]
+    ]
   end
 
   # Configuration for the OTP application
